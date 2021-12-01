@@ -12,6 +12,7 @@ services:
       - tp2-network
 
   elasticsearch_exporter:
+    container_name: exporter
     image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
     command:
       - '--es.uri=http://elastic:9200'
@@ -23,9 +24,9 @@ services:
     networks:
       - tp2-network
 
-  kibana_clone:
+  kibana:
     image: docker.elastic.co/kibana/kibana:7.15.2
-    container_name: kibana
+    container_name: kibana_container
     ports:
       - "5601:5601"
     environment:
@@ -41,6 +42,14 @@ services:
       - ./prometheus:/etc/prometheus
     networks:
       - tp2-network
+
+  filebeat:
+    build : ./
+    container_name: filebeat
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    networks: 
+    - tp2-network
 
 networks:
   tp2-network: null
