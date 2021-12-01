@@ -2,4 +2,4 @@ filebeat.inputs:
 - type: docker
   containers.ids: '*'
 output.elasticsearch:
-  hosts: ["https:/elastic:9200"] 
+  hosts: ["http://elastic:9200"]

@@ -46,10 +46,11 @@ services:
   filebeat:
     build : ./
     container_name: filebeat
+    user: root
     volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
     networks: 
-    - tp2-network
+      - tp2-network
 
 networks:
   tp2-network: null
