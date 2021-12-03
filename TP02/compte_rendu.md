@@ -1,3 +1,23 @@
+
+On a choisis l'elastic-search exporter car ça semble être celui de "base" à utiliser avec elastic search. C'est celui qu'il semblait le plus logique de prendre. On a rajouté ces lignes dans le docker-compose pour set up l'exporter. 
+
+```yml 
+
+  elasticsearch_exporter:
+    container_name: exporter
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
+    command:
+      - '--es.uri=http://elastic:9200'
+    restart: always
+    depends_on:
+      - elastic
+    ports:
+      - "9114:9114"
+    networks:
+      - tp2-network
+
+```
+
 # 2. List the existing Beats in the Elastic world, and explain in 1-2 lines what data it is supposed to collect.
 
 - File beat : permet de collecter des fichiers de logs
@@ -90,7 +110,6 @@ output.elasticsearch:
   hosts: ["https:/elastic:9200"] 
 
 ```
-
 Dockerfile : 
 
 Ce fichier permet de récupérer l'image filebeat, et de copier le fichier filebeat présent dans le dossier actuel dans le container filebeat. De plus il utilise les droits du user root pour donner les permissions de lecture du fichier filebeat.yml au groupe filebeat
@@ -106,3 +125,7 @@ USER filebeat
 Ensuite, on a juste à docker-compose up pour executer tous les containers. 
 
 Problème : filebeat ne se connecte pas à elasticsearch pour une raison inconnue. 
+
+# 4. Checkpoint : validate your setup with us and document your work
+
+On a ajouté un index pattern égal à *filebeat
