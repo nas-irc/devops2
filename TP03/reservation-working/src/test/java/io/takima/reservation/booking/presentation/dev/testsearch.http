@@ -1,0 +1,9 @@
+GET http://localhost:8080/api/travels/test?id=OCESN008105F0700748876
+Content-Type: application/json
+
+######
+
+GET http://localhost:8080/api/travels/search?from=StopPoint:OCETGV-87686006&to=StopPoint:OCETGV-87762906&date=2020-07-15
+Content-Type: application/json
+
+

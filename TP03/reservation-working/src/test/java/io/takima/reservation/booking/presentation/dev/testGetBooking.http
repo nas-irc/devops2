@@ -1,0 +1,15 @@
+GET http://localhost:8080/api/bookings?bookingNumber=bf93b85dfb
+Content-Type: application/json
+
+
+##### RESPONSE
+#{
+#  "invoiceLink": "invoicelink0",
+#  "bookingNumber": "dd023a020f",
+#  "ticketLinks": [
+#    "31335dd048f5460c",
+#    "d347eab8bb984719",
+#    "dh890a68bb984718"
+#  ]
+#}
+

@@ -1,0 +1,15 @@
+version: "3.7"
+
+networks:
+    app-network:
+
+services:
+    jaeger:
+        image: jaegertracing/opentelemetry-all-in-one
+        ports:
+            - "16686:16686"
+        environment:
+            - JAEGER_AGENT_HOST=jaeger
+        networks:
+            - app-network
+        restart: on-failure

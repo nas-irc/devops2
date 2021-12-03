@@ -1,0 +1,138 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet author="olaporte" id="create-open-data-sncf">
+
+        <createTable tableName="AGENCY">
+            <column name="AGENCY_ID" type="varchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK_AGENCY"/>
+            </column>
+            <column name="AGENCY_NAME" type="varchar(255)"/>
+            <column name="AGENCY_URL" type="varchar(255)"/>
+            <column name="AGENCY_TIMEZONE" type="varchar(255)"/>
+            <column name="AGENCY_LANG" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="ROUTES">
+            <column name="ROUTE_ID" type="varchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK_ROUTES"/>
+            </column>
+            <column name="AGENCY_ID" type="varchar(255)">
+                <constraints foreignKeyName="FK_ROUTES_AGENCY" references="AGENCY(AGENCY_ID)"/>
+            </column>
+            <column name="ROUTE_SHORT_NAME" type="varchar(255)"/>
+            <column name="ROUTE_LONG_NAME" type="varchar(255)"/>
+            <column name="ROUTE_DESC" type="varchar(255)"/>
+            <column name="ROUTE_TYPE" type="int"/>
+            <column name="ROUTE_URL" type="varchar(255)"/>
+            <column name="ROUTE_COLOR" type="varchar(255)"/>
+            <column name="ROUTE_TEXT_COLOR" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="CALENDAR">
+            <column name="SERVICE_ID" type="bigint"/>
+            <column name="MONDAY" type="boolean"/>
+            <column name="TUESDAY" type="boolean"/>
+            <column name="WEDNESDAY" type="boolean"/>
+            <column name="THURSDAY" type="boolean"/>
+            <column name="FRIDAY" type="boolean"/>
+            <column name="SATURDAY" type="boolean"/>
+            <column name="SUNDAY" type="boolean"/>
+            <column name="START_DATE" type="date"/>
+            <column name="END_DATE" type="date"/>
+        </createTable>
+
+        <createTable tableName="CALENDAR_DATES">
+            <column name="SERVICE_ID" type="bigint">
+                <!--constraints foreignKeyName="FK_CALENDAR_DATES_CALENDAR" references="CALENDAR(SERVICE_ID)" /-->
+            </column>
+            <column name="DATE" type="date"/>
+            <column name="EXCEPTION_TYPE" type="int"/>
+        </createTable>
+
+        <createTable tableName="STOPS">
+            <column name="STOP_ID" type="varchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK_STOPS"/>
+            </column>
+            <column name="STOP_NAME" type="varchar(255)"/>
+            <column name="STOP_DESC" type="boolean"/>
+            <column name="STOP_LAT" type="double"/>
+            <column name="STOP_LON" type="double"/>
+            <column name="ZONE_ID" type="varchar(255)"/>
+            <column name="STOP_URL" type="varchar(255)"/>
+            <column name="LOCATION_TYPE" type="int"/>
+            <column name="PARENT_STATION" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="TRIPS">
+            <column name="ROUTE_ID" type="varchar(255)">
+                <constraints foreignKeyName="FK_TRIPS_ROUTES" references="ROUTES(ROUTE_ID)"/>
+            </column>
+            <column name="SERVICE_ID" type="int">
+                <!--constraints foreignKeyName="FK_TRIPS_CALENDAR" references="CALENDAR(SERVICE_ID)"/-->
+            </column>
+            <column name="TRIP_ID" type="varchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK_TRIPS"/>
+            </column>
+            <column name="TRIP_HEADSIGN" type="int"/>
+            <column name="DIRECTION_ID" type="varchar(255)"/>
+            <column name="BLOCK_ID" type="varchar(255)"/>
+            <column name="SHAPE_ID" type="varchar(255)"/>
+            <column name="TRIP_MOTOR" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="STOP_TIMES">
+            <column name="TRIP_ID" type="varchar(255)">
+                <constraints foreignKeyName="FK_STOP_TIMES_TRIPS" references="TRIPS(TRIP_ID)"/>
+            </column>
+            <column name="ARRIVAL_TIME" type="time"/>
+            <column name="DEPARTURE_TIME" type="time"/>
+            <column name="STOP_ID" type="varchar(255)">
+                <constraints foreignKeyName="FK_STOP_TIMES_STOPS" references="STOPS(STOP_ID)"/>
+            </column>
+            <column name="STOP_SEQUENCE" type="int"/>
+            <column name="STOP_HEADSIGN" type="varchar(255)"/>
+            <column name="PICKUP_TYPE" type="int"/>
+            <column name="DROP_OFF_TYPE" type="int"/>
+            <column name="SHAPE_DIST_TRAVELED" type="varchar(255)"/>
+        </createTable>
+
+
+        <createTable tableName="TRANSFERS">
+            <column name="FROM_STOP_ID" type="varchar(255)"/>
+            <column name="TO_STOP_ID" type="varchar(255)"/>
+            <column name="TRANSFER_TYPE" type="varchar(255)"/>
+            <column name="MIN_TRANSFER_TIME" type="varchar(255)"/>
+        </createTable>
+
+
+        <createIndex
+                indexName="idx_stop_names"
+                schemaName="public"
+                tableName="STOPS">
+            <column descending="true" name="STOP_NAME"/>
+        </createIndex>
+        <createIndex
+                indexName="idx_calendar_start_date"
+                schemaName="public"
+                tableName="CALENDAR">
+            <column descending="true" name="START_DATE"/>
+        </createIndex>
+        <createIndex
+                indexName="idx_calendar_end_date"
+                schemaName="public"
+                tableName="CALENDAR">
+            <column descending="true" name="END_DATE"/>
+        </createIndex>
+        <createIndex
+                indexName="idx_calendar_service_id"
+                schemaName="public"
+                tableName="CALENDAR">
+            <column descending="true" name="SERVICE_ID"/>
+        </createIndex>
+
+    </changeSet>
+</databaseChangeLog>

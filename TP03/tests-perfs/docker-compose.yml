@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  gatling_tests:
+    image: registry.e-biz.fr/consulting/kit-demo/reservation/resa_gatling:01
+    container_name: gatling_test
+    build: .
+    env_file:
+      - .env
+    network_mode: "host"
+    volumes:
+    - ./reports:/usr/src/app/target/gatling
+  

@@ -1,0 +1,2 @@
+GET localhost:8080/api/tickets/2D63508AAA7C4DE9
+Content-Type: application/json

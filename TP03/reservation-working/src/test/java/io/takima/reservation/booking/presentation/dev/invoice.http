@@ -1,0 +1,6 @@
+GET http://localhost:8080/api/invoices?bookingNumber=bf93b85dfb
+Content-Type: application/json
+
+#####
+//facture format pdf
+

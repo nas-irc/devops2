@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "config.error.generator.enable",
+      "type": "java.lang.Boolean",
+      "description": "Value for enableling config.error.generator.",
+      "defaultValue": false
+    },
+    {
+      "name": "cors.allow-origin",
+      "type": "java.lang.String",
+      "description": "Patern for urls to cors.allow-origin."
+    }
+  ]
+}

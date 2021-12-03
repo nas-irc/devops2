@@ -1,0 +1,55 @@
+GET http://localhost:8080/api/travels/144
+Content-Type: application/json
+
+############## RESPONSE
+#{
+#  "travelId": 1,
+#  "priceFirstClass": 50.1,
+#  "priceSecondClass": 49.9,
+#  "tripId": "OCESN008827F38038-14103114001",
+#  "train": {
+#    "trainId": 1,
+#    "cars": [
+#      {
+#        "carId": 1,
+#        "carType": "VTU",
+#        "carClass": "A",
+#        "numberSeatFirstClass": 58,
+#        "numberSeatSecondClass": 0,
+#        "seats": [
+#          {
+#            "seatId": 1,
+#            "seatNumber": 1,
+#            "available": true
+#          },
+#          {
+#            "seatId": 2,
+#            "seatNumber": 2,
+#            "available": false
+#          }
+#        ],
+#        "trainId": 1
+#      },
+#      {
+#        "carId": 2,
+#        "carType": "VU",
+#        "carClass": "B",
+#        "numberSeatFirstClass": 0,
+#        "numberSeatSecondClass": 88,
+#        "seats": [
+#          {
+#            "seatId": 59,
+#            "seatNumber": 1,
+#            "available": true
+#          },
+#          {
+#            "seatId": 60,
+#            "seatNumber": 2,
+#            "available": true
+#          }
+#        ],
+#        "trainId": 1
+#      }
+#    ]
+#  }
+#}

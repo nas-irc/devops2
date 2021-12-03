@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  resa-db:
+    container_name: resa-db
+    build: resa-db
+    networks:
+      - resa_net
+    ports:
+      - "5432:5432"
+    volumes:
+      - resa-db:/var/lib/postgresql/data
+      - ./resa-db/conf/postgres.conf:/etc/postgresql/postgresql.conf:ro
+    env_file:
+      - ./resa-db/.env
+    restart: always
+    command:
+      - "postgres"
+      - "-c"
+      - "config_file=/etc/postgresql/postgresql.conf"
+
+
+  resa-liquibase:
+    image: liquibase/liquibase:4.2.0
+    container_name: resa-liquibase
+    env_file:
+      - ./db-dataloader/.env
+    volumes:
+      - ./db-dataloader/resources/changelog:/liquibase/changelog
+      - ./db-dataloader/resources/migrations:/liquibase/migrations
+      - ./db-dataloader/liquibase_policy_init.sh:/liquibase/liquibase_policy_init.sh:ro
+    entrypoint: ./liquibase_policy_init.sh
+    restart: on-failure
+    networks:
+      - resa_net
+    depends_on:
+      - resa-db
+
+networks:
+  resa_net:
+
+volumes:
+  resa-db:

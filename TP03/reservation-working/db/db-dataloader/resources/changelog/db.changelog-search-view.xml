@@ -1,0 +1,152 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet id="search-view" author="vrenard">
+
+
+
+        <createView encoding="UTF-8" viewName="VIEW_TRAVELS_SEARCH" replaceIfExists="true">
+
+            SELECT trips.trip_id,
+
+            cal.start_date,
+            cal.end_date,
+            st.stop_id,
+            s.stop_name,
+            st.arrival_time,
+            st.departure_time,
+            st.stop_sequence AS stop_order,
+            'monday' AS dayname,
+            t.travel_id as travel_id,
+            trips.trip_motor as trip_type,
+            s.parent_station
+            FROM trips
+            JOIN calendar cal ON trips.service_id = cal.service_id
+            JOIN stop_times st ON trips.trip_id = st.trip_id
+            JOIN stops s ON s.stop_id = st.stop_id
+            join travel t on trips.trip_id = t.trip_id
+            WHERE cal.monday 
+            UNION
+            SELECT trips.trip_id,
+            cal.start_date,
+            cal.end_date,
+            st.stop_id,
+            s.stop_name,
+            st.arrival_time,
+            st.departure_time,
+            st.stop_sequence AS stop_order,
+            'tuesday' AS dayname,
+            t.travel_id as travel_id,
+            trips.trip_motor as trip_type,
+            s.parent_station
+            FROM trips
+            JOIN calendar cal ON trips.service_id = cal.service_id
+            JOIN stop_times st ON trips.trip_id = st.trip_id
+            JOIN stops s ON s.stop_id = st.stop_id
+            join travel t on trips.trip_id = t.trip_id
+            WHERE cal.tuesday 
+            UNION
+            SELECT trips.trip_id,
+            cal.start_date,
+            cal.end_date,
+            st.stop_id,
+            s.stop_name,
+            st.arrival_time,
+            st.departure_time,
+            st.stop_sequence AS stop_order,
+            'wednesday' AS dayname,
+            t.travel_id as travel_id,
+            trips.trip_motor as trip_type,
+            s.parent_station
+            FROM trips
+            JOIN calendar cal ON trips.service_id = cal.service_id
+            JOIN stop_times st ON trips.trip_id = st.trip_id
+            JOIN stops s ON s.stop_id = st.stop_id
+            join travel t on trips.trip_id = t.trip_id
+            WHERE cal.wednesday 
+            UNION
+            SELECT trips.trip_id,
+            cal.start_date,
+            cal.end_date,
+            st.stop_id,
+            s.stop_name,
+            st.arrival_time,
+            st.departure_time,
+            st.stop_sequence AS stop_order,
+            'thursday' AS dayname,
+            t.travel_id as travel_id,
+            trips.trip_motor as trip_type,
+            s.parent_station
+            FROM trips
+            JOIN calendar cal ON trips.service_id = cal.service_id
+            JOIN stop_times st ON trips.trip_id = st.trip_id
+            JOIN stops s ON s.stop_id = st.stop_id
+            join travel t on trips.trip_id = t.trip_id
+            WHERE cal.thursday 
+            UNION
+            SELECT trips.trip_id,
+            cal.start_date,
+            cal.end_date,
+            st.stop_id,
+            s.stop_name,
+            st.arrival_time,
+            st.departure_time,
+            st.stop_sequence AS stop_order,
+            'friday' AS dayname,
+            t.travel_id as travel_id,
+            trips.trip_motor as trip_type,
+            s.parent_station
+            FROM trips
+            JOIN calendar cal ON trips.service_id = cal.service_id
+            JOIN stop_times st ON trips.trip_id = st.trip_id
+            JOIN stops s ON s.stop_id = st.stop_id
+            join travel t on trips.trip_id = t.trip_id
+            WHERE cal.friday 
+            UNION
+            SELECT trips.trip_id,
+            cal.start_date,
+            cal.end_date,
+            st.stop_id,
+            s.stop_name,
+            st.arrival_time,
+            st.departure_time,
+            st.stop_sequence AS stop_order,
+            'saturday' AS dayname,
+            t.travel_id as travel_id,
+            trips.trip_motor as trip_type,
+            s.parent_station
+            FROM trips
+            JOIN calendar cal ON trips.service_id = cal.service_id
+            JOIN stop_times st ON trips.trip_id = st.trip_id
+            JOIN stops s ON s.stop_id = st.stop_id
+            join travel t on trips.trip_id = t.trip_id
+            WHERE cal.saturday 
+            UNION
+            SELECT trips.trip_id,
+            cal.start_date,
+            cal.end_date,
+            st.stop_id,
+            s.stop_name,
+            st.arrival_time,
+            st.departure_time,
+            st.stop_sequence AS stop_order,
+            'sunday' AS dayname,
+            t.travel_id as travel_id,
+            trips.trip_motor as trip_type,
+            s.parent_station
+            FROM trips
+            JOIN calendar cal ON trips.service_id = cal.service_id
+            JOIN stop_times st ON trips.trip_id = st.trip_id
+            JOIN stops s ON s.stop_id = st.stop_id
+            full outer join travel t on trips.trip_id = t.trip_id
+            WHERE cal.sunday  ;
+
+
+        </createView>
+
+    </changeSet>
+
+
+</databaseChangeLog>

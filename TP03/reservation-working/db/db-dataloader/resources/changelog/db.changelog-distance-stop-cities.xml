@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet author="venard" id="create-and-load-distance-cities-stop">
+
+        <createTable tableName="STOP_CITY">
+            <column name="STOP_CITY_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_STOP_CITY"/>
+            </column>
+            <column name="POSITION" type="int"/>
+            <column name="CITY_NAME" type="varchar(255)"/>
+            <column name="STOP_ID" type="varchar(255)">
+                <constraints foreignKeyName="FK_STOP" references="STOPS(STOP_ID)"/>
+            </column>
+            <column name="DISTANCE_KM" type="float"/>
+
+        </createTable>
+        <loadData file="migrations/stops-cities-distance/cities_dist.csv" tableName="STOP_CITY"/>
+        <createSequence dataType="bigint" incrementBy="50" startValue="178000" sequenceName="stop_city_seq"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,26 @@
+POST http://localhost:8080/api/trains/
+Content-Type: application/json
+
+
+{
+  "cars": [
+    {
+      "index": 0,
+      "id": 1,
+      "numberSeats": 58,
+      "carClass": "A",
+      "carType": "VTU",
+      "numberSeatFirstClass": 58,
+      "numberSeatSecondClass": 0
+    },
+    {
+      "index": 1,
+      "id": 2,
+      "numberSeats": 88,
+      "carClass": "B",
+      "carType": "VU",
+      "numberSeatFirstClass": 0,
+      "numberSeatSecondClass": 88
+    }
+  ]
+}

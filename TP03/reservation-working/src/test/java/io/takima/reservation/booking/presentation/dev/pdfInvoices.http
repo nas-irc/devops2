@@ -1,0 +1,2 @@
+GET localhost:8080/api/invoices?bookingNumber=ed89856521
+Content-Type: application/json

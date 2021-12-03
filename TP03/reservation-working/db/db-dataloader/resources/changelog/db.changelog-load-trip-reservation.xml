@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet id="trip-reservation-data" author="fte">
+
+        <loadData file="migrations/trip-reservation/train.csv" tableName="TRAIN"/>
+        <loadData file="migrations/trip-reservation/car.csv" tableName="CAR"/>
+        <loadData
+                file="migrations/trip-reservation/travel.csv"
+                tableName="TRAVEL"/>
+
+        <loadData file="migrations/trip-reservation/seats/seat0.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat1.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat2.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat3.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat4.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat5.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat6.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat7.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat8.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat9.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat10.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat11.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat12.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat13.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat14.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat15.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat16.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat17.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat18.csv" tableName="SEAT"/>
+        <loadData file="migrations/trip-reservation/seats/seat19.csv" tableName="SEAT"/>
+    </changeSet>
+
+</databaseChangeLog>

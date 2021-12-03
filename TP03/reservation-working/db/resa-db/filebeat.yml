@@ -1,0 +1,25 @@
+filebeat.inputs:
+# Postgres QueryPlan
+- type: log
+  enabled: true
+  multiline.pattern: '^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
+  multiline.negate: true
+  multiline.match: after
+  paths:
+    - /var/log/postgresql/queryPlan-*.csv
+  tail_files: true
+  fields:
+    topic: queryPlan
+    hostName: "postgres"
+
+output.logstash:
+  hosts: ['${LOGSTASH_HOST_NAME:logstash}:5047']
+
+logging:
+  to_files: true
+  files:
+    path: /var/log/filebeat
+    name: filebeat.log
+    rotateeverybytes: 10485760 # = 10MB
+    keepfiles: 7
+  level: info

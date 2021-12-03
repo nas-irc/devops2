@@ -1,0 +1,83 @@
+GET http://localhost:8080/api/trains/
+Content-Type: application/json
+
+###########
+#{
+#  "content": [
+#    {
+#      "trainId": 1,
+#      "cars": [
+#        {
+#          "carId": 1,
+#          "carType": "VTU",
+#          "carClass": "A",
+#          "numberSeatFirstClass": 58,
+#          "numberSeatSecondClass": 0,
+
+#          "trainId": 1
+#        },
+#        {
+#          "carId": 2,
+#          "carType": "VU",
+#          "carClass": "B",
+#          "numberSeatFirstClass": 0,
+#          "numberSeatSecondClass": 88,
+#          "trainId": 1
+#        }
+#      ]
+#    }
+#  ],
+#  "pageable": {
+#    "sort": {
+#      "sorted": true,
+#      "unsorted": false,
+#      "empty": false
+#    },
+#    "offset": 0,
+#    "pageNumber": 0,
+#    "pageSize": 20,
+#    "paged": true,
+#    "unpaged": false
+#  },
+#  "totalPages": 1,
+#  "totalElements": 1,
+#  "last": true,
+#  "number": 0,
+#  "sort": {
+#    "sorted": true,
+#    "unsorted": false,
+#    "empty": false
+#  },
+#  "size": 20,
+#  "first": true,
+#  "numberOfElements": 1,
+#  "empty": false
+#}
+#
+
+GET localhost:8080/api/trains/1
+Content-Type: application/json
+
+########RESPONSE
+
+#{
+#  "trainId": 1,
+#  "cars": [
+#    {
+#      "carId": 1,
+#      "carType": "VTU",
+#      "carClass": "A",
+#      "numberSeatFirstClass": 58,
+#      "numberSeatSecondClass": 0,
+#      "trainId": 1
+#    },
+#    {
+#      "carId": 2,
+#      "carType": "VU",
+#      "carClass": "B",
+#      "numberSeatFirstClass": 0,
+#      "numberSeatSecondClass": 88,
+#      "trainId": 1
+#    }
+#  ]
+#}

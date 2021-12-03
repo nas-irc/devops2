@@ -1,0 +1,52 @@
+
+########### REQUEST
+GET http://localhost:8080/api/travels?from=IdStationFrom&to=IdStationTo&date=25-06-2021&tripType=DIRECT
+Content-Type: application/json
+
+
+########### RESPONSE
+#{
+#  "content": [
+#    {
+#      "travelId": 0,
+#      "priceFirstClass": null,
+#      "priceSecondClass": null,
+#      "availableFirstClassSeatCount": null,
+#      "availableSecondClassSeatCount": null,
+#      "departure": {
+#          "name": "Gare de Paris-Montparnasse 1-2",
+#          "departure": "21:01:00"
+#      },
+#      "arrival": {
+
+#          "name": "Gare de Angers-St-Laud",
+#          "departure": "22:23:00"
+#      }
+#    }
+#  ],
+#  "pageable": {
+#    "sort": {
+#      "sorted": true,
+#      "unsorted": false,
+#      "empty": false
+#    },
+#    "offset": 0,
+#    "pageNumber": 0,
+#    "pageSize": 20,
+#    "paged": true,
+#    "unpaged": false
+#  },
+#  "totalPages": 526,
+#  "totalElements": 10505,
+#  "last": false,
+#  "number": 0,
+#  "sort": {
+#    "sorted": true,
+#    "unsorted": false,
+#    "empty": false
+#  },
+#  "size": 20,
+#  "first": true,
+#  "numberOfElements": 20,
+#  "empty": false
+#}

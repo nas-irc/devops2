@@ -1,0 +1,101 @@
+POST http://localhost:8080/api/bookings
+Content-Type: application/json
+
+{
+  "travelId": 976,
+  "stationA": "StopArea:OCE87391003",
+  "stationB": "StopArea:OCE87396002",
+  "date": "2020-01-11",
+  "seatBookingRequests": [
+    {
+      "seatId": 2,
+      "firstName": "Emmanuel",
+      "lastName": "Macron",
+      "birthdate": "21/12/1977",
+      "email": "emacron@fakehost.ru",
+      "phoneNumber": "0123456789"
+    },
+    {
+      "seatId": 4,
+      "firstName": "Brigitte",
+      "lastName": "Macron",
+      "birthdate": "13/04/1953",
+      "email": "emacron@fakehost.ru",
+      "phoneNumber": "0123456789"
+    },
+    {
+      "seatId": 5,
+      "firstName": "Mélissa",
+      "lastName": "Russo",
+      "birthdate": "26-01-1999",
+      "email": "lacus.quisque@elementumloremut.com",
+      "phoneNumber": "07 67 98 19 55"
+    }
+  ]
+}
+
+
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "Response status is not 201");
+});
+client.global.set("bookingNumber", response.body.json.bookingNumber);
+client.global.set("ticketNumber", response.body.json.ticketLinks[0]);
+
+
+client.test("Response content-type is json", function() {
+
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received '" + response.contentType.mimeType + "'");
+});
+%}
+
+######
+
+POST http://localhost:8080/api/bookings
+Content-Type: application/json
+
+{
+  "travelId": 1,
+  "stationA": "StopPoint:OCETGV INOUI-87391003",
+  "stationB": "StopPoint:OCETGV INOUI-87484006",
+  "date": "2020-01-11",
+  "seatBookingRequests": [
+    {
+      "seatId": 2,
+      "firstName": "Emmanuel",
+      "lastName": "Macron",
+      "birthdate": "21/12/1977",
+      "email": "emacron@fakehost.ru",
+      "phoneNumber": "0123456789"
+    },
+    {
+      "seatId": 4,
+      "firstName": "Brigitte",
+      "lastName": "Macron",
+      "birthdate": "13/04/1953",
+      "email": "emacron@fakehost.ru",
+      "phoneNumber": "0123456789"
+    },
+    {
+      "seatId": 5,
+      "firstName": "Mélissa",
+      "lastName": "Russo",
+      "birthdate": "26-01-1999",
+      "email": "lacus.quisque@elementumloremut.com",
+      "phoneNumber": "07 67 98 19 55"
+    }
+  ]
+}
+
+> {%
+client.test("Request executed unsuccessfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+});
+
+%}
+
+
+########
+GET http://localhost:8080/api/bookings?bookingNumber={{bookingNumber}}
+Content-Type: application/json

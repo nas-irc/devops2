@@ -1,0 +1,52 @@
+#######################################idTravel
+PATCH http://localhost:8080/api/travels/1
+Content-Type: application/json
+
+
+{
+  "priceFirstClass": 125.26,
+  "priceSecondClass": 268.36,
+  "trainId": 1
+}
+
+#####
+
+PATCH http://localhost:8080/api/travels/243
+Content-Type: application/json
+
+
+{
+  "priceFirstClass": 1,
+  "priceSecondClass": 1
+}
+
+
+
+#####
+POST http://localhost:8080/api/bookings
+Content-Type: application/json
+
+{
+  "seatBookingRequests": [
+    {
+      "seatId": 144,
+      "lastName": "vbnvbnvbn",
+      "firstName": "vbnvbn",
+      "birthdate": "2021-07-08",
+      "email": "vbnvnb",
+      "phoneNumber": "0"
+    }
+  ],
+  "travelId": "243",
+  "date": "2021-07-01",
+  "stationA": "StopPoint:OCETGV-87391003",
+  "stationB": "StopPoint:OCETGV-87396002"
+}
+
+####
+GET localhost:8080/api/tickets/83DDDEBC389A473A
+Content-Type: application/pdf
+
+#######
+GET localhost:8080/api/invoices/1e8ee09690
+Content-Type: application/json

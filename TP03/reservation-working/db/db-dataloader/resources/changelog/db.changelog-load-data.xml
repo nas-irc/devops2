@@ -1,0 +1,64 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet id="20200911-open-data-intercites" author="olaporte">
+
+
+        <loadData
+                file="migrations/intercites/agency.csv"
+                tableName="AGENCY"/>
+
+        <loadData
+                file="migrations/intercites/routes.csv"
+                tableName="ROUTES"/>
+
+        <loadData
+                file="migrations/tgv/routes.csv"
+                tableName="ROUTES"/>
+
+        <loadData
+                file="migrations/intercites/calendar_dates.iso.txt"
+                tableName="CALENDAR_DATES">
+        </loadData>
+
+        <loadData
+                file="migrations/tgv/calendar_dates.iso.txt"
+                tableName="CALENDAR_DATES"/>
+
+        <loadData
+                file="migrations/intercites/calendar.iso.txt"
+                tableName="CALENDAR"/>
+
+        <loadData
+                file="migrations/tgv/calendar.iso.txt"
+                tableName="CALENDAR"/>
+
+
+        <loadData
+                file="migrations/stops.csv"
+                tableName="STOPS"/>
+
+        <loadData
+                file="migrations/intercites/trips.txt"
+                tableName="TRIPS"/>
+
+        <loadData
+                file="migrations/intercites/stop_times.txt"
+                tableName="STOP_TIMES"/>
+
+
+        <loadData
+                file="migrations/tgv/trips.txt"
+                tableName="TRIPS"/>
+
+        <loadData
+                file="migrations/tgv/stop_times.csv"
+                tableName="STOP_TIMES"/>
+
+        <loadData file="migrations/passengers.csv" tableName="PASSENGER"/>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,25 @@
+#######################################idTravel
+PATCH http://localhost:8080/api/travels/1
+Content-Type: application/json
+
+
+{
+  "priceFirstClass": 125.26,
+  "priceSecondClass": 268.36,
+  "trainId": 1
+}
+
+#####
+
+PATCH http://localhost:8080/api/travels/243
+Content-Type: application/json
+
+
+{
+  "priceFirstClass": 1,
+  "priceSecondClass": 1
+}
+
+####
+GET localhost:8080/api/tickets/BC910096621D44D5
+Content-Type: application/json

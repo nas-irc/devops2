@@ -1,0 +1,146 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet author="fte" id="create-trip-reservation-tables">
+
+        <createTable tableName="TRAIN">
+            <column name="TRAIN_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_TRAIN"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="CAR">
+            <column name="CAR_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_CAR"/>
+            </column>
+            <column name="CAR_TYPE" type="varchar(3)"/>
+            <column name="CAR_CLASS" type="varchar(3)"/>
+            <column name="NUMBER_SEAT_FIRST_CLASS" type="int"/>
+            <column name="NUMBER_SEAT_SECOND_CLASS" type="int"/>
+
+            <column name="TRAIN_ID" type="bigint">
+                <constraints foreignKeyName="FK_TRAIN" references="TRAIN(TRAIN_ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="SEAT">
+            <column name="SEAT_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_SEAT"/>
+            </column>
+            <column name="SEAT_NUMBER" type="int"/>
+
+            <column name="CAR_ID" type="bigint">
+                <constraints foreignKeyName="FK_CAR" references="CAR(CAR_ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRAVEL">
+            <column name="TRAVEL_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_TRAVEL"/>
+            </column>
+            <column name="PRICE_FIRST_CLASS" type="float"/>
+            <column name="PRICE_SECOND_CLASS" type="float"/>
+
+            <column name="TRIP_ID" type="varchar(255)">
+                <constraints foreignKeyName="FK_TRIP" references="TRIPS(TRIP_ID)" nullable="false"/>
+            </column>
+
+            <column name="TRAIN_ID" type="bigint">
+                <constraints foreignKeyName="FK_TRAIN" references="TRAIN(TRAIN_ID)"/>
+            </column>
+        </createTable>
+
+
+        <createTable tableName="PASSENGER">
+            <column name="PASSENGER_ID" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_PASSENGER"/>
+            </column>
+            <column name="FIRSTNAME" type="varchar(255)"/>
+            <column name="LASTNAME" type="varchar(255)"/>
+            <column name="BIRTHDATE" type="varchar(255)"/>
+            <column name="EMAIL" type="varchar(255)"/>
+            <column name="PHONE_NUMBER" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="BOOKING">
+            <column name="BOOKING_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_BOOKING"/>
+            </column>
+
+            <column name="BOOKING_NUMBER" type="varchar(10)"/>
+
+            <column name="TRAVEL_ID" type="bigint">
+                <constraints foreignKeyName="FK_TRAVEL" references="TRAVEL(TRAVEL_ID)"/>
+            </column>
+
+            <column name="PASSENGER_ID" type="bigint">
+                <constraints foreignKeyName="FK_PASSENGER" references="PASSENGER(PASSENGER_ID)"/>
+            </column>
+
+            <column name="DATE" type="date"/>
+            <column name="DEPARTURE_STATION" type="varchar(255)">
+                <constraints foreignKeyName="FK_STOP_D_BOOKING" references="STOPS(STOP_ID)"/>
+            </column>
+            <column name="ARRIVAL_STATION" type="varchar(255)">
+                <constraints foreignKeyName="FK_STOP_A_BOOKING" references="STOPS(STOP_ID)"/>
+            </column>
+
+
+        </createTable>
+
+        <createTable tableName="TICKET">
+            <column name="TICKET_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_TICKET"/>
+            </column>
+
+            <column name="TICKET_NUMBER" type="varchar(16)"/>
+
+            <column name="PAID_PRICE" type="varchar(16)"/>
+
+            <column name="SEAT_ID" type="bigint">
+                <constraints foreignKeyName="FK_SEAT" references="SEAT(SEAT_ID)"/>
+            </column>
+
+            <column name="PASSENGER_ID" type="bigint">
+                <constraints foreignKeyName="FK_PASSENGER" references="PASSENGER(PASSENGER_ID)"/>
+            </column>
+
+            <column name="BOOKING_ID" type="bigint">
+                <constraints foreignKeyName="FK_BOOKING" references="BOOKING(BOOKING_ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="INVOICE">
+            <column name="INVOICE_ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_INVOICE"/>
+            </column>
+
+            <column name="TOTAL_PRICE" type="varchar(16)"/>
+
+            <column name="BOOKING_ID" type="bigint">
+                <constraints foreignKeyName="FK_BOOKING" references="BOOKING(BOOKING_ID)"/>
+            </column>
+        </createTable>
+
+        <sql>ALTER TABLE CAR ADD CONSTRAINT check_car_type_valid CHECK (CAR_TYPE in ('VU', 'VTU'))</sql>
+        <sql>ALTER TABLE CAR ADD CONSTRAINT check_car_class_valid CHECK (CAR_CLASS in ('A', 'B', 'AB'))</sql>
+        <sql>ALTER TABLE CAR ADD CONSTRAINT check_car_number_seat_first_class_valid CHECK (NUMBER_SEAT_FIRST_CLASS in
+            (0, 58))
+        </sql>
+        <sql>ALTER TABLE CAR ADD CONSTRAINT check_car_number_seat_second_class_valid CHECK (NUMBER_SEAT_SECOND_CLASS in
+            (0, 88))
+        </sql>
+
+        <createSequence dataType="bigint" incrementBy="50" startValue="64000" sequenceName="car_id_seq"/>
+        <createSequence dataType="bigint" incrementBy="50" startValue="11000" sequenceName="train_id_seq"/>
+        <createSequence dataType="bigint" incrementBy="50" startValue="11000" sequenceName="travel_id_seq"/>
+        <createSequence dataType="bigint" incrementBy="50" startValue="4700000" sequenceName="seat_id_seq"/>
+        <createSequence dataType="bigint" incrementBy="50" sequenceName="booking_id_seq"/>
+        <createSequence dataType="bigint" incrementBy="50" sequenceName="ticket_id_seq"/>
+        <createSequence dataType="bigint" incrementBy="50" startValue="301" sequenceName="passenger_id_seq"/>
+        <createSequence dataType="bigint" incrementBy="50" sequenceName="invoice_id_seq"/>
+    </changeSet>
+</databaseChangeLog>
